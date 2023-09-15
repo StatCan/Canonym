@@ -1,0 +1,60 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "canonym"
+version = "2023.09.15"
+description = "Canonym :  A Statistics Canada anonymization package"
+readme = "README.rst"
+requires-python = ">=3.9"
+keywords = ["anonymization", "private information", "redacting", "StatCan", "Statistics Canada"]
+authors = [
+  {email = "alexandre.istrate@statcan.gc.ca", name = "Alexandre Istrate"},
+  {email = "Sayema.Mashhadi@statcan.gc.ca", name = "Sayema Mashhadi"}
+]
+maintainers = [
+  {email = "alexandre.istrate@statcan.gc.ca", name = "Alexandre Istrate"},
+  {email = "Sayema.Mashhadi@statcan.gc.ca", name = "Sayema Mashhadi"}
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Programming Language :: Python :: 3",
+  "Operating System :: OS Independent",
+]
+
+dependencies = [
+  "confuse",
+  "spacy==3.4.0", 
+  "en-core-web-lg @ https://github.com/explosion/spacy-models/releases/download/en_core_web_lg-3.4.0/en_core_web_lg-3.4.0-py3-none-any.whl", # Spacy English model
+  "faker",
+  "fr-core-news-lg @ https://github.com/explosion/spacy-models/releases/download/fr_core_news_lg-3.4.0/fr_core_news_lg-3.4.0-py3-none-any.whl", # Spacy French model
+  "importlib_resources ",
+  "lingua-language-detector",
+  "pandas",
+  "presidio-analyzer==2.2.29",
+  "presidio-anonymizer==2.2.29",
+  "protobuf==3.20.3",
+  "tqdm",
+  "torch",
+  "torchvision",
+  "torchaudio",
+  "transformers[sentencepiece]"
+]
+
+[tool.setuptools]
+# ...
+include-package-data = true
+
+[tool.setuptools.packages.find]
+where = ["src", "src/config"]
+namespaces = true
+
+[tool.setuptools.package-data]
+canonym = ["config/*.yaml", "config/*.txt", "config/*.csv"]
+
+[project.urls]
+homepage = "https://github.com/StatCan/Canonym"
+documentation = "https://github.com/StatCan/Canonym/blob/main/README.md"
+repository = "https://github.com/StatCan/Canonym.git"
+

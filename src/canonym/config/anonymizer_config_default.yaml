@@ -1,0 +1,96 @@
+##############################################################
+#                                                            #
+#           TAG ANONYMIZER Configuration File                #
+#                                                            #
+#                                                            #
+##############################################################
+
+AVAILABLE_LANGS:
+    - en
+    - fr
+    
+DEFAULT_ENTITIES:   
+    # Transformer entities
+    - PERSON
+    - ORGANISATION
+    - LOCATION
+    # SpaCy entities
+    - DATE_TIME
+    - NRP
+    # Presidio entities
+    - EMAIL_ADDRESS
+    - URL
+    - US_BANK_NUMBER
+    - US_PASSPORT
+    - IBAN_CODE
+    - IP_ADDRESS
+    - PHONE_NUMBER
+     # Custom entities
+    - ALPHANUMERIC_ID
+    - CA_PASSPORT
+    - CA_POST_CODE
+    - PROVINCE
+    - CA_SIN
+    - STREET_TYPE
+    - CA_UCI
+    - COUNTRY
+    - FULL_ADDRESS
+    - GENDER
+    - TITLE
+    - NUMBER
+
+ALPHABET_ENTITIES:
+    - PERSON
+    - ORGANISATION
+    - NRP
+    - PROVINCE
+    - STREET_TYPE
+    - COUNTRY
+    - GENDER
+    - TITLE
+ 
+SPECIAL_ENTITIES:
+    - EMAIL_ADDRESS
+    - DATE_TIME
+    - URL
+    - IP_ADDRESS
+    - FULL_ADDRESS
+
+NUMERIC_ENTITIES:
+    - US_BANK_NUMBER
+    - CA_SIN
+    - CA_UCI
+    - NUMBER
+    - PHONE_NUMBER
+
+ALPHANUMERIC_ENTITIES:
+    - US_PASSPORT
+    - LOCATION
+    - IBAN_CODE
+    - ALPHANUMERIC_ID
+    - CA_PASSPORT
+    - CA_POST_CODE
+    
+CUSTOM_ENTITIES:
+    - PERSON
+    - FULL_ADDRESS
+    - EMAIL_ADDRESS
+    - CA_PASSPORT
+    - PHONE_NUMBER
+    - CA_UCI
+    - CA_SIN
+ 
+ALL_ANONYMIZER_STRATEGIES:
+    - replace_all_with_tag : {replace: DEFAULT_ENTITIES}
+    - redact_all : {redact : DEFAULT_ENTITIES}
+    - hash_all : {hash : DEFAULT_ENTITIES}
+    - mask_all : {mask : DEFAULT_ENTITIES}
+    - scramble_all : {scramble : DEFAULT_ENTITIES}
+    - mixed_per_entity_type : {hash : ALPHABET_ENTITIES, mask : SPECIAL_ENTITIES, randomize : NUMERIC_ENTITIES, redact : ALPHANUMERIC_ENTITIES}
+    - hash_one : {hash: [PERSON]}
+    - mask_some: {mask: [PERSON, FULL_ADDRESS], redact: [PHONE_NUMBER]}
+    - replace_custom: {replace: CUSTOM_ENTITIES}
+    - redact_custom: {redact : CUSTOM_ENTITIES}
+    - faker_custom: {faker : CUSTOM_ENTITIES}
+    - faker_all: {faker : DEFAULT_ENTITIES}
+    - replace_w_value_custom: {replace_val : CUSTOM_ENTITIES}

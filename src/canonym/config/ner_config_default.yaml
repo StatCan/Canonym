@@ -1,0 +1,64 @@
+##############################################################
+#                                                            #
+#               NER Tagger Configuration File                #
+#                                                            #
+#                                                            #
+##############################################################
+
+AVAILABLE_LANGS:
+    - en
+    - fr
+
+SCORE_THRESHOLD: 0.4
+
+DEFAULT_RECOGNIZERS:   
+    - UsBankRecognizer
+    - UsPassportRecognizer
+    - PhoneRecognizer
+    - AdvancedUrlRecognizer
+    - AdvancedDateRecognizer
+    - EmailRecognizer
+    - IbanRecognizer
+    - IpRecognizer
+    - SpacyRecognizer
+    - CaPostCodeRecognizer
+    - CaUciRecognizer
+    - CaSinRecognizer
+    - CaPassportRecognizer
+    - NumberRecognizer
+    - CaProvincesRecognizer
+    - MobileBertNer
+    - DistilCamembertNer
+    - CaStreetTypeRecognizer
+    - FullAddressRecognizer
+    - AlphaNumericIDRecognizer
+    - CountriesRecognizer
+    - GenderRecognizer
+    - TitleRecognizer
+
+POST_PROCESSING_ENTITIES : 
+    DATE_TIME: [DateTimeMinDigitsEnhancer, DateTimeDaySuffixEnhancer, DateTimeMonthEnhancer]  
+
+PRESIDIO_NLP_ENGINE_CONFIG:
+    nlp_engine_name: spacy
+    models:
+      - 
+        lang_code: en
+        model_name: en_core_web_lg
+      -
+        lang_code: fr
+        model_name: fr_core_news_lg
+        
+SPACY_ENTITIES:
+    - DATE_TIME
+    - NRP
+    
+TRANSFORMER_MODELS_ENTITIES:
+    - LOCATION
+    - PERSON
+    - ORGANISATION
+    
+TRANSFORMER_MODELS_ENHANCERS:
+    - WordExtenderEnhancer
+    - ContiguousEntitiesEnhancer
+    
