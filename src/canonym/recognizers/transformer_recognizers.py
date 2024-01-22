@@ -150,7 +150,7 @@ class TransformerRecogniser(EntityRecognizer):
                                 or ((i>=max_search) and ('##' not in last_token)) # Exceeded the max search and not a split word
                                 )
             if split_conditions:
-                return tokens[:-i], tokens[-i:]
+                return tokens[:-i], tokens[-i:] if i>0 else tokens, [] # split tokens or return tokens and an empty list if i==0 , resolving issue #1 IndexError: list index out of range
 
             last_token = decoded_token
 
