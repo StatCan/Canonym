@@ -58,10 +58,24 @@ class TransformerRecogniser(EntityRecognizer):
 
     def load(self):
         ''' Loads the Transformers model and creates a NER pipeline'''
-        self.tokenizer = AutoTokenizer.from_pretrained(self.model_path, truncation=True, padding=False)
+        self.tokenizer = AutoTokenizer.from_pretrained(self.model_path)
         self.model = AutoModelForTokenClassification.from_pretrained(self.model_path)
+        if not self.model.config.max_position_embeddings and not self.tokenizer.model_max_length:
+            self.max_model_input = 512
+        elif not self.model.config.max_position_embeddings:
+            self.max_model_input = min(self.tokenizer.model_max_length, 512)
+        elif not self.tokenizer.model_max_length:
+            self.max_model_input = min(self.model.config.max_position_embeddings, 512)
+        else:
+            self.max_model_input = min(self.model.config.max_position_embeddings, self.tokenizer.model_max_length)
+        self.tokenizer = AutoTokenizer.from_pretrained(self.model_path, 
+                                                       truncation=True, 
+                                                       padding=False, 
+                                                       model_max_length=self.max_model_input)
         self.pipeline = pipeline(task='ner', model=self.model, tokenizer=self.tokenizer, aggregation_strategy='simple')
-        self.max_model_input = list(self.tokenizer.max_model_input_sizes.values())[0]
+
+
+
 
     def analyze(self,
                 text: str,
@@ -150,7 +164,7 @@ class TransformerRecogniser(EntityRecognizer):
                                 or ((i>=max_search) and ('##' not in last_token)) # Exceeded the max search and not a split word
                                 )
             if split_conditions:
-                return tokens[:-i], tokens[-i:] if i>0 else tokens, [] # split tokens or return tokens and an empty list if i==0 , resolving issue #1 IndexError: list index out of range
+                return (tokens[:-i], tokens[-i:]) if i>0 else (tokens, []) # split tokens or return tokens and an empty list if i==0 , resolving issue #1 IndexError: list index out of range
 
             last_token = decoded_token
 
