@@ -4,15 +4,15 @@ Le français suit l'anglais
 
 ## Installation
 
-Create a virtual environment with Python \>=3.9 .. code:
+Create a virtual environment with Python \>=3.10 .. code:
 
-    conda create -n=canonym python=3.9
+    conda create -n=canonym python=3.10
     conda activate canonym
 
 You can install Canonym using the wheel located in the dist folder:
 
 ``` 
-pip install dist\canonym_public-2023.9.15-py3-none-any.whl
+pip install dist\canonym_public-2024.12.3-py3-none-any.whl
 ```
 
 ## Usage
@@ -160,9 +160,9 @@ link: [CONTRIBUTING.MD](https://github.com/StatCan/Canonym/blob/main/CONTRIBUTIN
 
 ## Installation
 
-Créer un environnement virtuel avec Python \>=3.9 ... code:
+Créer un environnement virtuel avec Python \>=3.10 ... code:
 
-    conda create -n=canonym python=3.9
+    conda create -n=canonym python=3.10
     conda activate canonym
 
 Vous pouvez installer Canonym en utilisant le fichier whl situé dans le
@@ -170,7 +170,7 @@ dossier dist :
 
 ... code:
 
-    pip install dist\canonym_public-2023.9.15-py3-none-any.whl
+    pip install dist\canonym_public-2024.12.3-py3-none-any.whl
 
 ## Utilisation
 
